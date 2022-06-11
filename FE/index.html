@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Mini E-commerse</h1>
+        <h2>Add product here</h2>
+        <input type="text" id="id">
+        <input type="text" id="name">
+        <input type="text" id="price">
+        <button onclick="addproduct()">Add Product</button>
+    </div>
+    <div>
+        <input type="text" id="delete_id">
+        <button onclick="updateProduct()">Click here</button>
+    </div>
+    <div>
+        <input type="text" id="id1">
+        <button onclick="getProduct()">Click here</button>
+    </div>
+    <div>
+        <input type="text" id="id2">
+        <button onclick="putProduct()">Click here</button>
+    </div>
+</body>
+</html>
+<script>
+ async function addproduct(){
+      const data={
+          id:document.getElementById("id").value,
+          name:document.getElementById("name").value,
+          price:document.getElementById("price").value,
+
+      };
+      
+      let response= await fetch("http://localhost:5000/api/products",{
+          method:"POST",
+          body: JSON.stringify(data),
+          headers:{"Content-Type":"application/json"},
+      });
+      let dat = await response.json();
+  }
+
+  async function updateProduct(){
+     let id= document.getElementById("delete_id").value;
+
+      
+      let response= await fetch("http://localhost:5000/api/products",{
+          method:"DELETE",
+          body: JSON.stringify(data),
+          headers:{"Content-Type":"application/json"},
+      });
+      let dat = await response.json();
+  }
+
+  async function putProduct(){
+     let id= document.getElementById("id2").value;
+
+      
+      let response= await fetch(`http://localhost:5000/api/products=${id}`,{
+          method:"PATCH",
+          body: JSON.stringify(data),
+          headers:{"Content-Type":"application/json"},
+      });
+      let dat = await response.json();
+  }
+</script>
